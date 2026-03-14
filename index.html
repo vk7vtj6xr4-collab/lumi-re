@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agence d'Automatisation No-Code | Gagnez du Temps avec l'IA</title>
+    <meta name="description" content="Agence spécialisée dans l'automatisation no-code pour TPE et indépendants. Automatisez vos tâches répétitives et sécurisez vos processus avec des solutions IA modernes.">
+    <meta property="og:title" content="Agence d'Automatisation No-Code">
+    <meta property="og:description" content="Automatisez vos tâches répétitives pour gagner du temps chaque semaine. Solutions no-code et IA pour TPE et indépendants.">
+    <meta property="og:type" content="website">
+    <style>
+        /* Reset et base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fafafa;
+        }
+        h1, h2 {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 600;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        p {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        a {
+            color: #008080;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        button, input[type="submit"] {
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(250, 250, 250, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #008080;
+        }
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background-color: #fafafa;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .nav-links.active {
+            display: flex;
+        }
+        .nav-links a {
+            margin: 0.5rem 0;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        .nav-links a.active {
+            background-color: #008080;
+            color: white;
+        }
+        .burger {
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: #1a1a1a;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        .burger.active div:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        .burger.active div:nth-child(2) {
+            opacity: 0;
+        }
+        .burger.active div:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .hero {
+            padding-top: 6rem;
+            text-align: center;
+            background: linear-gradient(135deg, #fafafa 0%, #f0f8f8 100%);
+        }
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hero-text {
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        .hero-visual {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .workflow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .workflow-item {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+        .workflow-item:not(:last-child)::after {
+            content: '→';
+            margin-left: 1rem;
+            color: #008080;
+            font-size: 1.5rem;
+        }
+
+        /* Boutons */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: #008080;
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            border: none;
+        }
+        .btn:hover {
+            background-color: #006666;
+            box-shadow: 0 4px 12px rgba(0, 128, 128, 0.3);
+        }
+        .btn-secondary {
+            background-color: transparent;
+            color: #008080;
+            border: 1px solid #008080;
+        }
+        .btn-secondary:hover {
+            background-color: #008080;
+            color: white;
+        }
+
+        /* Cartes */
+        .cards {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        .card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+            text-align: center;
+        }
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Process */
+        .process {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: #008080;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Cases */
+        .case {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+            margin-bottom: 1.5rem;
+        }
+        .case h3 {
+            color: #008080;
+            margin-bottom: 0.5rem;
+        }
+
+        /* About */
+        .about-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .values {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        .value {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Contact */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        input, select, textarea {
+            padding: 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .contact-info {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background-color: #1a1a1a;
+            color: white;
+        }
+
+        /* Focus */
+        button:focus-visible, input:focus-visible, textarea:focus-visible, a:focus-visible {
+            outline: 2px solid #008080;
+            outline-offset: 2px;
+        }
+
+        /* Media queries */
+        @media (min-width: 768px) {
+            .nav-links {
+                display: flex;
+                flex-direction: row;
+                position: static;
+                width: auto;
+                background-color: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+            .nav-links a {
+                margin: 0 1rem;
+            }
+            .burger {
+                display: none;
+            }
+            .hero-content {
+                flex-direction: row;
+                text-align: left;
+                gap: 2rem;
+            }
+            .hero-text {
+                flex: 1;
+            }
+            .hero-visual {
+                flex: 1;
+            }
+            .workflow {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .workflow-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .process {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .values {
+                flex-direction: row;
+                justify-content: center;
+            }
+            .value {
+                flex: 1;
+                max-width: 200px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .cards {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            .process {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">Agence Auto</div>
+            <div class="nav-links" id="nav-links">
+                <a href="#hero">Accueil</a>
+                <a href="#services">Services</a>
+                <a href="#process">Process</a>
+                <a href="#cases">Cas clients</a>
+                <a href="#about">À propos</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="burger" id="burger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Agence d'automatisation no-code pour TPE et indépendants</h1>
+                    <p>On automatise vos tâches répétitives pour vous faire gagner du temps chaque semaine et sécuriser vos process.</p>
+                    <a href="#contact" class="btn">Planifier un appel</a>
+                    <a href="#process" class="btn btn-secondary">Découvrir comment on travaille</a>
+                </div>
+                <div class="hero-visual">
+                    <div class="workflow">
+                        <div class="workflow-item">
+                            <span>📧</span>
+                            <span>Lead</span>
+                        </div>
+                        <div class="workflow-item">
+                            <span>📝</span>
+                            <span>Notion</span>
+                        </div>
+                        <div class="workflow-item">
+                            <span>💼</span>
+                            <span>CRM</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <h2>Ce qu'on automatise pour vous</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="card-icon">🎯</div>
+                    <h3>Capture et suivi des leads</h3>
+                    <p>Quand un prospect remplit un formulaire ou vous écrit, il est automatiquement enregistré et vous recevez un rappel.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">👥</div>
+                    <h3>Onboarding clients</h3>
+                    <p>Envoi automatique de documents, contrats, factures, et organisation des tâches internes.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">📊</div>
+                    <h3>Reporting & finances automatisés</h3>
+                    <p>Centralisation des paiements et génération automatique de rapports.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon">🔧</div>
+                    <h3>Workflows sur-mesure</h3>
+                    <p>Intégrations spécifiques selon votre métier.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="process">
+            <h2>Comment on travaille</h2>
+            <div class="process">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <h3>Appel découverte</h3>
+                    <p>Comprendre votre business et identifier les tâches répétitives.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <h3>Audit & plan d'automatisation</h3>
+                    <p>Cartographie des outils et des flux existants.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <h3>Mise en place & tests</h3>
+                    <p>Création des scénarios no-code, tests et corrections.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <h3>Suivi & optimisation</h3>
+                    <p>Monitoring, ajustements et nouvelles idées d'amélioration.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cases">
+            <h2>Exemples concrets</h2>
+            <div class="case">
+                <h3>Coach indépendant</h3>
+                <p><strong>Problème :</strong> 3h par semaine perdues à répondre aux mêmes emails.</p>
+                <p><strong>Solution :</strong> Mise en place d'un formulaire + réponses automatiques + suivi dans un tableau.</p>
+                <p><strong>Résultat :</strong> 3h gagnées chaque semaine.</p>
+            </div>
+            <div class="case">
+                <h3>Boutique en ligne</h3>
+                <p><strong>Problème :</strong> Suivi des commandes et relances clients manuel.</p>
+                <p><strong>Solution :</strong> Automatisation entre la boutique, un sheet et mails de suivi.</p>
+                <p><strong>Résultat :</strong> Moins d'erreurs, meilleur suivi client.</p>
+            </div>
+            <div class="case">
+                <p><em>"L'agence a transformé notre façon de travailler. On a récupéré des heures précieuses chaque semaine."</em> - Client satisfait</p>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2>Qui est derrière l'agence ?</h2>
+            <div class="about-content">
+                <p>Jeune entrepreneur passionné par l'optimisation des processus et l'automatisation. Avec une expérience en gestion de projets et une formation en commerce, je aide les TPE et indépendants à gagner du temps grâce aux solutions no-code et IA.</p>
+                <div class="values">
+                    <div class="value">
+                        <h4>Transparence</h4>
+                        <p>Communication claire et honnête sur les possibilités.</p>
+                    </div>
+                    <div class="value">
+                        <h4>Simplicité</h4>
+                        <p>Solutions faciles à comprendre et à maintenir.</p>
+                    </div>
+                    <div class="value">
+                        <h4>ROI concret</h4>
+                        <p>Résultats mesurables et bénéfiques pour votre business.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Parlons de votre projet</h2>
+            <div class="contact-content">
+                <form action="#" method="post">
+                    <input type="text" name="name" placeholder="Votre nom" required>
+                    <input type="email" name="email" placeholder="Votre email" required>
+                    <select name="business" required>
+                        <option value="">Type de business</option>
+                        <option value="tpe">TPE</option>
+                        <option value="independant">Indépendant</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                    <textarea name="message" placeholder="Décrivez votre projet" required></textarea>
+                    <input type="submit" value="Envoyer" class="btn">
+                </form>
+                <div class="contact-info">
+                    <p>Ou contactez-moi directement :</p>
+                    <p><a href="mailto:contact@agenceauto.fr">contact@agenceauto.fr</a></p>
+                    <p><a href="https://linkedin.com/in/agenceauto" target="_blank">LinkedIn</a></p>
+                    <p>Réponse sous 24-48h.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Agence Auto. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Menu burger
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('nav-links');
+        burger.addEventListener('click', () => {
+            burger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Scroll fluide
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Fermer le menu mobile après clic
+                if (navLinks.classList.contains('active')) {
+                    burger.classList.remove('active');
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+
+        // Reveal au scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navigation active
+        const navItems = document.querySelectorAll('.nav-links a');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            document.querySelectorAll('section').forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href').includes(current)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
